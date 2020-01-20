@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="bookingTests" verbose="1" parallel="tests" thread-count="8">
+    <test name="RoomSearchPositiveTest">
+        <classes>
+            <class name="RoomSearchPositiveTest" >
+                <methods>
+                    <include name="searchPositiveTest" />
+                    <include name="childrenPlacementValidationTest" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+   </suite>
