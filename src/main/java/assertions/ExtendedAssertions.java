@@ -3,7 +3,7 @@ package assertions;
 import common.drivers.Driver;
 import common.logger.LogInstance;
 import io.qameta.allure.Step;
-import models.RoomRequest;
+import models.AccommodationRequest;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -18,7 +18,7 @@ public class ExtendedAssertions {
     protected WebDriver driver = Driver.getDriver();
 
     @Step("checked the page by current url")
-    public void url(String expectedUrl) {
+    public void urlIsCorrect(String expectedUrl) {
         String actualUrl = driver.getCurrentUrl();
         Assert.assertTrue(actualUrl.contains(expectedUrl),
                 String.format("the expected page with url %s wasn't opened, current url is %s", expectedUrl, actualUrl));
@@ -26,22 +26,73 @@ public class ExtendedAssertions {
     }
 
     @Step("checked parameters on the searching result screen")
-    public void assertSearchParametersShownCorrect(RoomRequest expectedParameters, RoomRequest actualParameters) {
+    public void assertSearchParametersShownCorrect(AccommodationRequest expectedParameters, AccommodationRequest actualParameters) {
         Assert.assertEquals(expectedParameters, actualParameters,
                 String.format("expected parameters aren't shown correct %s, actual parameters are %s",
                         expectedParameters, actualParameters));
-        log.info(String.format("are shown correct parameters\n expected parameters are: %s\n actual parameters are:   %s",
+        log.info(String.format("were shown correct parameters\n expected parameters are: %s\n actual parameters are:   %s",
                 expectedParameters, actualParameters));
     }
 
-    @Step("checked parameters on the searching result screen")
+    @Step("checked sorting accommodation by price")
     public void assertSortingByPriceIsCorrect(List<Integer> actualList) {
         List<Integer> expectedList = new ArrayList<>(actualList);
         Collections.sort(expectedList);
         Assert.assertEquals(expectedList, actualList,
-                String.format("sorting isn't correct, expected list: %s\n actual list: %s",
+                String.format("sorting wasn't correct, expected list: %s\n actual list: %s",
                         expectedList, actualList));
         log.info(String.format("sorting was made correctly\n expected list: %s\n actual list:   %s",
                 expectedList, actualList));
+    }
+
+    @Step("checked sorting accommodation by type")
+    public void assertSortingByTypeIsCorrect(List<String> actualList) {
+        for (String type: actualList) {
+            Assert.assertTrue(type.contains("Apart"),
+                    String.format("sorting wasn't correct, got: %s", type));
+        }
+        log.info(String.format("sorting by type was correct"));
+    }
+
+    @Step("checked filtration accommodation by review score")
+    public void assertFiltrationByReviewScoreIsCorrect(List<Double> actualList, String reviewScoreLabel) {
+        Integer reviewScoreInt = Integer.parseInt(reviewScoreLabel.replaceAll("[^0-9]", ""));
+        Double reviewScoreCategory = Double.parseDouble(reviewScoreInt.toString());
+        for (Double review: actualList) {
+            Assert.assertTrue(review >= reviewScoreCategory,
+                    String.format("filtration wasn't correct, actual review score: %s doesn't match to the category: %s",
+                            review, reviewScoreLabel));
+        }
+        log.info(String.format("sorting by type was correct, all review scores match to the category: %s",
+                reviewScoreLabel));
+    }
+
+    @Step("checked filtration accommodation by review score")
+    public void assertFiltrationByReviewScoreIsCorrect(boolean isReviewBadgePresent, String reviewScoreLabel) {
+        Assert.assertTrue(isReviewBadgePresent,
+                String.format("filtration wasn't correct, actual review score doesn't match to the category: %s",
+                        reviewScoreLabel));
+        log.info(String.format("sorting by type was correct, all review scores match to the category: %s",
+                reviewScoreLabel));
+    }
+
+    @Step("checked recommendation by search parameters")
+    public void assertRecommendationIsCorrect(String actualRecommendation, String expectedRecommendation) {
+        Assert.assertEquals(actualRecommendation, expectedRecommendation,
+                String.format("recommendation wasn't correct, expected: %s, but got %s",
+                        expectedRecommendation, actualRecommendation));
+        log.info(String.format("recommendation was correct, got: %s",
+                actualRecommendation));
+    }
+
+    @Step("checked recommendation by search parameters")
+    public void assertRecommendationIsCorrect(List<String> actualRecommendationList, String expectedRecommendation) {
+        for (String recommendation: actualRecommendationList) {
+            Assert.assertTrue(recommendation.contains(expectedRecommendation),
+                    String.format("expected recommendation wasn't got,\n expected: %s, but got: %s",
+                            expectedRecommendation, recommendation));
+        }
+        log.info(String.format("recommendation was correct, got: %s",
+                expectedRecommendation));
     }
 }

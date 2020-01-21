@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
-public class RoomRequest {
+public class AccommodationRequest {
 
     private String destination;
     private LocalDate checkInDate;
@@ -14,7 +14,7 @@ public class RoomRequest {
     private int rooms;
     private boolean travelForWork;
 
-    public RoomRequest(String destination, LocalDate checkInDate, LocalDate checkOutDate, int adults, List<Child> children, int rooms, boolean travelForWork) {
+    public AccommodationRequest(String destination, LocalDate checkInDate, LocalDate checkOutDate, int adults, List<Child> children, int rooms, boolean travelForWork) {
         this.destination = destination;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
@@ -56,7 +56,7 @@ public class RoomRequest {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        RoomRequest that = (RoomRequest) o;
+        AccommodationRequest that = (AccommodationRequest) o;
         return adults == that.adults &&
                 rooms == that.rooms &&
                 travelForWork == that.travelForWork &&

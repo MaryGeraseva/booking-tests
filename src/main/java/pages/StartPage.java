@@ -94,9 +94,9 @@ public class StartPage extends BasePageObject {
     }
 
     @Step("launched accommodation search")
-    public RoomsSearchingPage launchSearch() {
+    public AccommodationSearchingPage launchSearch() {
         click(checkPriceButton);
-        return new RoomsSearchingPage();
+        return new AccommodationSearchingPage();
     }
 
     public String getUlr() {

@@ -1,12 +1,65 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="bookingTests" verbose="1" parallel="tests" thread-count="8">
-    <test name="RoomSearchPositiveTest">
+    <test name="SearchParametersInputTest">
         <classes>
-            <class name="RoomSearchPositiveTest" >
+            <class name="AccommodationSearchingTest" >
                 <methods>
-                    <include name="searchPositiveTest" />
+                    <include name="searchParametersInputTest" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="ChildrenPlacementValidationTest">
+        <classes>
+            <class name="AccommodationSearchingTest" >
+                <methods>
                     <include name="childrenPlacementValidationTest" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="AccommodationSortingByPriceTest">
+        <classes>
+            <class name="AccommodationSortingTest" >
+                <methods>
+                    <include name="accommodationSortingByPriceTest" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="AccommodationSortingByTypeTest">
+        <classes>
+            <class name="AccommodationSortingTest" >
+                <methods>
+                    <include name="accommodationSortingByTypeTest" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="AccommodationFiltrationTest">
+        <classes>
+            <class name="AccommodationFiltrationTest" >
+                <methods>
+                    <include name="accommodationFiltrationByReviewTest" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="RecommendedSortingTest">
+        <classes>
+            <class name="PlacementRecommendationTest" >
+                <methods>
+                    <include name="recommendedSortingTest" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="RecommendationLabelTest">
+        <classes>
+            <class name="PlacementRecommendationTest" >
+                <methods>
+                    <include name="recommendationLabelTest" />
                 </methods>
             </class>
         </classes>

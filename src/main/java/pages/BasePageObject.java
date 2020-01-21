@@ -31,32 +31,31 @@ public class BasePageObject {
 
     @Step("got the web element text")
     public String getText(By locator) {
-        waitForVisibilityOf(locator, 5);
+        waitForVisibilityOf(locator, 12);
         String text = driver.findElement(locator).getText();
         log.info(String.format("got web element text %s", text));
         return text;
     }
 
     public WebElement findElement(By locator) {
-        waitForVisibilityOf(locator, 5);
+        waitForVisibilityOf(locator, 12);
         return driver.findElement(locator);
     }
 
     public List<WebElement> findAllElements(By locator) {
-        waitForVisibilityOf(locator, 5);
+        waitForVisibilityOf(locator, 12);
         return driver.findElements(locator);
     }
 
-    @Step("clicked on the web element")
     public void click(By locator) {
-        waitForVisibilityOf(locator, 5);
+        waitForVisibilityOf(locator, 12);
         findElement(locator).click();
         log.info(String.format("clicked on the web element %s", locator.toString()));
     }
 
     @Step("typed in the field")
     public void type(By locator, String text) {
-        waitForVisibilityOf(locator, 8);
+        waitForVisibilityOf(locator, 12);
         findElement(locator).sendKeys(text);
         log.info(String.format("in the field typed: %s", text));
     }
