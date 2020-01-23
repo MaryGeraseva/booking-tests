@@ -9,16 +9,19 @@ public class BrowserFactory {
     private Browser browser;
 
     public BrowserFactory() {
-        String propertyBrowser = System.getProperty("selenium.browser");
+        String propertyBrowser = System.getProperty("browser");
         if (propertyBrowser == null) {
             browser = new Chrome();
-            log.info("didn't get browser type, started default browser chrome");
-        } else if (propertyBrowser.contains("firefox")) {
+            log.info("no browser type defined, started default browser chrome");
+        } else if (propertyBrowser.equals("firefox")) {
             browser = new Firefox();
-        } else if (propertyBrowser.contains("chrome")) {
+        } else if (propertyBrowser.equals("chrome")) {
             browser = new Chrome();
+        } else {
+            browser = new Chrome();
+            log.info("unknown browser type, only chrome and firefox supported, started default browser chrome");
         }
-        log.info("created webDriver: " + Browser.browser);
+        log.info("created webDriver: " + browser.getBrowserProperty());
     }
 
     public Browser getBrowser() {

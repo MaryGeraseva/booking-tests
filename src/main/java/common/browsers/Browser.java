@@ -5,10 +5,21 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 public abstract class Browser {
 
-    public static String driver = System.getProperty("selenium.driver");
-    public static String browser = System.getProperty("selenium.browser");
+    private String browserProperty;
+
+    Browser(String browserProperty) {
+        this.browserProperty = browserProperty;
+        if (System.getenv(browserProperty) == null){
+            throw new RuntimeException(String.format("unable to find a Driver, please, set system environment variable: %s", browserProperty));
+        }
+        System.setProperty(browserProperty, System.getenv(browserProperty));
+    }
 
     public abstract WebDriver getDriver();
 
     public abstract DesiredCapabilities getCapabilities();
+
+    String getBrowserProperty() {
+        return browserProperty;
+    }
 }
