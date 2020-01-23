@@ -1,10 +1,10 @@
-package models.accommodstion;
+package models.accommodation;
 
 
 import java.util.Objects;
 
 public class Child {
-    int age;
+    private int age;
 
     public Child(int age) {
         this.age = age;

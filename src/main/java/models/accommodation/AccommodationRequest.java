@@ -1,4 +1,4 @@
-package models.accommodstion;
+package models.accommodation;
 
 import java.time.LocalDate;
 import java.util.List;

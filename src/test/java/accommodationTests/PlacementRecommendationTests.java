@@ -1,10 +1,10 @@
 package accommodationTests;
 
-import common.TestUtilities;
+import common.DateTimeUtils;
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;
-import models.accommodstion.AccommodationRequest;
-import models.accommodstion.Child;
+import models.accommodation.AccommodationRequest;
+import models.accommodation.Child;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.accommodation.AccommodationSearchingPage;
@@ -18,8 +18,8 @@ public class PlacementRecommendationTests extends BaseAccommodationSearchingTest
     @DataProvider(name = "recommendedSorting")
     private static Object[][] sortingData() {
         LocalDate currentDate = LocalDate.now();
-        LocalDate checkIn = TestUtilities.getInWeeksDate(1);
-        LocalDate checkOut = TestUtilities.getInWeeksDate(2);
+        LocalDate checkIn = DateTimeUtils.getInWeeksDate(1);
+        LocalDate checkOut = DateTimeUtils.getInWeeksDate(2);
         return new Object[][]{
                 {"1", new AccommodationRequest("Prague", currentDate, checkOut, 1,
                         Collections.emptyList(), 1, true), "Top picks for business travellers"},
@@ -46,8 +46,8 @@ public class PlacementRecommendationTests extends BaseAccommodationSearchingTest
     @DataProvider(name = "placementRecommendationLabels")
     private static Object[][] labelsData() {
         LocalDate currentDate = LocalDate.now();
-        LocalDate checkIn = TestUtilities.getInWeeksDate(1);
-        LocalDate checkOut = TestUtilities.getInWeeksDate(2);
+        LocalDate checkIn = DateTimeUtils.getInWeeksDate(1);
+        LocalDate checkOut = DateTimeUtils.getInWeeksDate(2);
         return new Object[][]{
                 {"1", new AccommodationRequest("Vilnius", checkIn, checkOut, 2,
                         Collections.singletonList(new Child(5)), 1, false),

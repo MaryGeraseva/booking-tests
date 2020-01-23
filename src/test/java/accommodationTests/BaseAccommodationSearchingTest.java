@@ -1,7 +1,7 @@
 package accommodationTests;
 
 import common.BaseTest;
-import models.accommodstion.AccommodationRequest;
+import models.accommodation.AccommodationRequest;
 import pages.accommodation.AccommodationSearchingPage;
 import pages.common.StartPage;
 

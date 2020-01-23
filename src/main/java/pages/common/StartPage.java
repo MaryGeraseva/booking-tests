@@ -1,7 +1,7 @@
 package pages.common;
 
 import io.qameta.allure.Step;
-import models.accommodstion.Child;
+import models.accommodation.Child;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import pages.accommodation.AccommodationSearchingPage;

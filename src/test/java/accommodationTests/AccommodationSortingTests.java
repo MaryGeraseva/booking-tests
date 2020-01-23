@@ -1,10 +1,10 @@
 package accommodationTests;
 
-import common.TestUtilities;
+import common.DateTimeUtils;
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;
-import models.accommodstion.AccommodationRequest;
-import models.accommodstion.Child;
+import models.accommodation.AccommodationRequest;
+import models.accommodation.Child;
 import org.testng.annotations.Test;
 import pages.accommodation.AccommodationSearchingPage;
 
@@ -18,7 +18,7 @@ public class AccommodationSortingTests extends BaseAccommodationSearchingTest {
     @Description(value = "The test checks sorting accommodation by price (lowest first)")
     public void accommodationSortingByPriceTest() {
         LocalDate checkIn = LocalDate.now();
-        LocalDate checkOut = TestUtilities.getInWeeksDate(2);
+        LocalDate checkOut = DateTimeUtils.getInWeeksDate(2);
         AccommodationRequest request = new AccommodationRequest("Paris", checkIn, checkOut, 2,
                 Collections.singletonList(new Child(5)), 1, false);
         AccommodationSearchingPage searchingPage = getAccommodationSearchingResults(request);
@@ -31,7 +31,7 @@ public class AccommodationSortingTests extends BaseAccommodationSearchingTest {
     @Description(value = "The test checks sorting accommodation by type (show homes first)")
     public void accommodationSortingByTypeTest() {
         LocalDate checkIn = LocalDate.now();
-        LocalDate checkOut = TestUtilities.getInWeeksDate(2);
+        LocalDate checkOut = DateTimeUtils.getInWeeksDate(2);
         AccommodationRequest request = new AccommodationRequest("Lida", checkIn, checkOut, 2,
                 Collections.emptyList(), 1, false);
         AccommodationSearchingPage searchingPage = getAccommodationSearchingResults(request);

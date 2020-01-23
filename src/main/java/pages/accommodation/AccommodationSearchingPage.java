@@ -1,8 +1,8 @@
 package pages.accommodation;
 
 import io.qameta.allure.Step;
-import models.accommodstion.AccommodationRequest;
-import models.accommodstion.Child;
+import models.accommodation.AccommodationRequest;
+import models.accommodation.Child;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import pages.common.BasePageObject;

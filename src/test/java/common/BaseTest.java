@@ -1,7 +1,6 @@
 package common;
 
 import assertions.ExtendedAssertions;
-import common.TestListener;
 import common.drivers.Driver;
 import common.logger.LogInstance;
 import io.qameta.allure.Allure;
@@ -21,9 +20,9 @@ import java.nio.file.Paths;
 @Listeners({TestListener.class})
 public class BaseTest {
 
-    public WebDriver driver;
-    public Logger log;
-    public ExtendedAssertions assertions;
+    private WebDriver driver;
+    protected Logger log;
+    protected ExtendedAssertions assertions;
 
     @BeforeMethod
     public void setUp(Method method, ITestContext context, Object[] testData) {

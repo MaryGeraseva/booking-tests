@@ -10,10 +10,10 @@ public class TestListener implements ITestListener {
 
     private String testMethodName;
     private Logger log;
-    private TestUtilities utilities = new TestUtilities();
+    private ScreenshotUtils utilities = new ScreenshotUtils();
 
     private String screenshotPath = String.format("%s\\target\\test-output\\screenshots\\%s\\%s\\%s.png",
-            System.getProperty("user.dir"), utilities.getTodayDate(), testMethodName, utilities.getSystemTime());
+            System.getProperty("user.dir"), DateTimeUtils.getTodayDate(), testMethodName, DateTimeUtils.getSystemTime());
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
@@ -59,10 +59,10 @@ public class TestListener implements ITestListener {
 
     private void getErrorLog(ITestResult iTestResult) {
         log.error(iTestResult.getThrowable().toString());
-        String stackTrace = "\n";
+        StringBuilder stackTrace = new StringBuilder("\n");
         for (StackTraceElement element : iTestResult.getThrowable().getStackTrace()) {
-            stackTrace += element.toString() + "\n";
+            stackTrace.append(element.toString()).append("\n");
         }
-        log.error(stackTrace);
+        log.error(stackTrace.toString());
     }
 }

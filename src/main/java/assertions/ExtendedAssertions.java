@@ -3,7 +3,7 @@ package assertions;
 import common.drivers.Driver;
 import common.logger.LogInstance;
 import io.qameta.allure.Step;
-import models.accommodstion.AccommodationRequest;
+import models.accommodation.AccommodationRequest;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -21,7 +21,7 @@ public class ExtendedAssertions {
 
     protected Logger log = LogInstance.getLogger();
     protected WebDriver driver = Driver.getDriver();
-    protected SoftAssert softAssert;
+    private SoftAssert softAssert;
 
     @Step("checked the page by current url")
     public void urlIsCorrect(String expectedUrl) {
@@ -57,13 +57,13 @@ public class ExtendedAssertions {
             Assert.assertTrue(type.contains("Apart"),
                     String.format("sorting wasn't correct, got: %s", type));
         }
-        log.info(String.format("sorting by type was correct"));
+        log.info("sorting by type was correct");
     }
 
     @Step("checked filtration accommodation by review score")
     public void assertFiltrationByReviewScoreIsCorrect(List<Double> actualList, String reviewScoreLabel) {
-        Integer reviewScoreInt = Integer.parseInt(reviewScoreLabel.replaceAll("[^0-9]", ""));
-        Double reviewScoreCategory = Double.parseDouble(reviewScoreInt.toString());
+        int reviewScoreInt = Integer.parseInt(reviewScoreLabel.replaceAll("[^0-9]", ""));
+        Double reviewScoreCategory = Double.parseDouble(Integer.toString(reviewScoreInt));
         for (Double review: actualList) {
             Assert.assertTrue(review >= reviewScoreCategory,
                     String.format("filtration wasn't correct, actual review score: %s doesn't match to the category: %s",
@@ -86,11 +86,11 @@ public class ExtendedAssertions {
     public void assertFiltrationByPriceIsCorrect(List<Double> priceList, double[] priceRange,
                                                  LocalDate checkIn, LocalDate checkOut) {
         for (double price : priceList) {
-            System.out.println(DAYS.between(checkIn, checkOut));
+            //System.out.println(DAYS.between(checkIn, checkOut));
             double pricePerDay = price/DAYS.between(checkIn, checkOut);
             Assert.assertTrue(isPriceInRange(pricePerDay, priceRange),
                     String.format("filtration wasn't correct, price %s doesn't match in range %s",
-                            pricePerDay, priceRange));
+                            pricePerDay, Arrays.toString(priceRange)));
         }
         log.info(String.format("sorting by type was correct, all review scores match to the range: %s",
                 Arrays.toString(priceRange)));

@@ -1,7 +1,7 @@
 package flightsTests;
 
 import common.BaseTest;
-import common.TestUtilities;
+import common.DateTimeUtils;
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;
 import models.flights.Flight;
@@ -17,8 +17,8 @@ public class DirectFlightsSearchingTest extends BaseTest {
 
     @DataProvider(name = "directFlights")
     private static Object[][] data() {
-        LocalDate departureDate = TestUtilities.getInWeeksDate(1);
-        LocalDate arrivalDate = TestUtilities.getInWeeksDate(2);
+        LocalDate departureDate = DateTimeUtils.getInWeeksDate(1);
+        LocalDate arrivalDate = DateTimeUtils.getInWeeksDate(2);
         return new Object[][]{
                 {"1", new Flight("Moscow", "Milan", departureDate, arrivalDate)},
                 {"2", new Flight("Moscow", "Rome", departureDate, arrivalDate)}
