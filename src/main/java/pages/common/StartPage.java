@@ -1,9 +1,11 @@
-package pages;
+package pages.common;
 
 import io.qameta.allure.Step;
-import models.Child;
+import models.accommodstion.Child;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import pages.accommodation.AccommodationSearchingPage;
+import pages.flights.FlightsStartPage;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -14,7 +16,7 @@ public class StartPage extends BasePageObject {
     private By languageLink = By.xpath("//a[@class='popover_trigger']");
     private By englishUKLink = By.cssSelector("li.lang_en-gb  a");
     private By destinationInputField = By.id("ss");
-    private By dateField = By.cssSelector("div.xp__dates");
+    private By datePicker = By.cssSelector("div.xp__dates");
     private By currentMonth = By.xpath("//div[@class='bui-calendar__wrapper'][1]//tbody");
     private By nextMonth = By.xpath("//div[@class='bui-calendar__wrapper'][2]//tbody");
     private By guestsPicker = By.cssSelector("div.xp__guests");
@@ -30,6 +32,7 @@ public class StartPage extends BasePageObject {
     private By ageDropdown = By.cssSelector("select[name=age]");
     private By checkPriceButton = By.cssSelector("button.sb-searchbox__button");
     private By forWorkTravelCheckbox = By.cssSelector("div.xp__travel-purpose");
+    private By flightsLink = By.xpath("//a[@data-decider-header=\"flights\"]");
 
     public void open() {
         openPage(ulr);
@@ -48,7 +51,7 @@ public class StartPage extends BasePageObject {
 
     @Step("set checkIn/checkOut dates")
     public void setDates(LocalDate checkInDate, LocalDate checkOutDate) {
-        click(dateField);
+        click(datePicker);
         pickDates(currentMonth, nextMonth, checkInDate.getDayOfMonth(), checkOutDate.getDayOfMonth());
         log.info(String.format("set checkIn %s >> checkOut %s", checkInDate, checkOutDate));
     }
@@ -73,7 +76,7 @@ public class StartPage extends BasePageObject {
         int childrenNumber = 0;
 
         for (WebElement childrenAgeDropdown : childrenAgeDropdownList) {
-            childrenAgeDropdown.click();
+            click(childrenAgeDropdown);
             //children age options [0...17] start from index [1]
             selectOptionByIndex(childrenAgeDropdown, children.get(childrenNumber).getAge() + 1);
             childrenNumber++;
@@ -101,5 +104,11 @@ public class StartPage extends BasePageObject {
 
     public String getUlr() {
         return ulr;
+    }
+
+    public FlightsStartPage openFlightsPage() {
+        setEnglishLanguage();
+        click(flightsLink);
+        return new FlightsStartPage();
     }
 }

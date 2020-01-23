@@ -1,4 +1,4 @@
-package models;
+package models.accommodstion;
 
 
 import java.util.Objects;

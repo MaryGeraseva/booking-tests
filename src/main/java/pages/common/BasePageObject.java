@@ -1,4 +1,4 @@
-package pages;
+package pages.common;
 
 import common.drivers.Driver;
 import common.logger.LogInstance;
@@ -37,6 +37,14 @@ public class BasePageObject {
         return text;
     }
 
+    @Step("got the web element attribute")
+    public String getAttribute(By locator, String attributeName) {
+        waitForVisibilityOf(locator, 12);
+        String value = findElement(locator).getAttribute(attributeName);
+        log.info(String.format("got web element attribute %s", value));
+        return value;
+    }
+
     public WebElement findElement(By locator) {
         waitForVisibilityOf(locator, 12);
         return driver.findElement(locator);
@@ -53,11 +61,20 @@ public class BasePageObject {
         log.info(String.format("clicked on the web element %s", locator.toString()));
     }
 
+    public void click(WebElement element) {
+        waitForVisibilityOf(element, 12);
+        element.click();
+    }
+
     @Step("typed in the field")
     public void type(By locator, String text) {
         waitForVisibilityOf(locator, 12);
         findElement(locator).sendKeys(text);
         log.info(String.format("in the field typed: %s", text));
+    }
+
+    public void sendKey(By locator, Keys key) {
+        findElement(locator).sendKeys(key);
     }
 
     private void waitFor(ExpectedCondition<WebElement> condition, Integer timeOutInSeconds) {
@@ -86,6 +103,20 @@ public class BasePageObject {
         }
     }
 
+    public void waitForVisibilityOf(WebElement element, Integer... timeOutInSeconds) {
+        int attempts = 0;
+        while (attempts < 2) {
+            try {
+                waitFor(ExpectedConditions.visibilityOf(element),
+                        (timeOutInSeconds.length > 0 ? timeOutInSeconds[0] : null));
+                break;
+            } catch (StaleElementReferenceException e) {
+                log.error(String.format("the element is stale %s", e.getMessage()));
+            }
+            attempts++;
+        }
+    }
+
     public void waitForInvisibilityOf(By locator, Integer... timeOutInSeconds) {
         int attempts = 0;
         while (attempts < 2) {
@@ -104,23 +135,6 @@ public class BasePageObject {
         return findElement(locator).isDisplayed();
     }
 
-    @Step("the field was cleaned")
-    public void clear(By locator) {
-        findElement(locator).clear();
-        log.info("the field was cleaned");
-    }
-
-    @Step("sent the key")
-    public void sendKey(By locator, Keys key) {
-        findElement(locator).sendKeys(key);
-    }
-
-    @Step("sent the key with the action")
-    public void sendKeyWithAction(Keys key) {
-        Actions action = new Actions(driver);
-        action.sendKeys(key).build().perform();
-        log.info("sent the key with the action");
-    }
 
     public List<WebElement> getColumns(By locator) {
         return driver.findElement(locator).findElements(By.tagName("td"));
@@ -224,6 +238,21 @@ public class BasePageObject {
         log.info(String.format("%s the checkbox is selected", checkbox.getText()));
         return true;
     }
+
+    @Step("switched to the other browser tab")
+    public void switchToTab(String firstWindowHeader) {
+        for(String windowHandle : driver.getWindowHandles()) {
+            if(!windowHandle.equals(firstWindowHeader)) {
+                driver.switchTo().window(windowHandle);
+            }
+        }
+    }
+
+    @Step("got current window header")
+    public String getWindowHeader() {
+        return driver.getWindowHandle();
+    }
+
 }
 
 

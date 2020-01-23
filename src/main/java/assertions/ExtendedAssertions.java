@@ -3,11 +3,13 @@ package assertions;
 import common.drivers.Driver;
 import common.logger.LogInstance;
 import io.qameta.allure.Step;
-import models.AccommodationRequest;
+import models.accommodstion.AccommodationRequest;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -16,6 +18,7 @@ public class ExtendedAssertions {
 
     protected Logger log = LogInstance.getLogger();
     protected WebDriver driver = Driver.getDriver();
+    protected SoftAssert softAssert;
 
     @Step("checked the page by current url")
     public void urlIsCorrect(String expectedUrl) {
@@ -94,5 +97,33 @@ public class ExtendedAssertions {
         }
         log.info(String.format("recommendation was correct, got: %s",
                 expectedRecommendation));
+    }
+
+    @Step("checked checkIn/checkOut dates")
+    public void assertDates(AccommodationRequest accommodationRequest, LocalDate actualCheckIn, LocalDate actualCheckOut) {
+        softAssert = new SoftAssert();
+        LocalDate expectedCheckIn = accommodationRequest.getCheckInDate();
+        LocalDate expectedCheckOut = accommodationRequest.getCheckOutDate();
+        softAssert.assertEquals(expectedCheckIn, actualCheckIn,
+                String.format("got wrong checkIn date %s instead of %s", actualCheckIn, expectedCheckIn));
+        softAssert.assertEquals(expectedCheckIn, actualCheckIn,
+                String.format("got wrong checkOut date %s instead of %s", actualCheckOut, expectedCheckOut));
+        log.info(String.format("checkIn/checkOut dates was shown correctly, checkIn: %s checkOut: %s",
+                actualCheckIn, actualCheckOut));
+    }
+
+    @Step("checked booking price")
+    public void assertPrice(AccommodationRequest accommodationRequest, List<Integer> priceList, int expectedPrice) {
+        softAssert = new SoftAssert();
+        softAssert.assertTrue(priceList.contains(expectedPrice),
+                String.format("didn't got expected price: %s", expectedPrice));
+        log.info(String.format("price was offered correctly, got expected price: %s",
+                expectedPrice));
+    }
+
+    @Step("checked reservation couldn't be started")
+    public void assertReserveButtonIsDisable(boolean isButtonDisable) {
+        Assert.assertTrue(isButtonDisable, "didn't get expected result, reserve button is enable");
+        log.info("get expected result, reserve button is disable");
     }
 }

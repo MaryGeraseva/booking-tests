@@ -1,4 +1,4 @@
-package models;
+package models.accommodstion;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -14,7 +14,8 @@ public class AccommodationRequest {
     private int rooms;
     private boolean travelForWork;
 
-    public AccommodationRequest(String destination, LocalDate checkInDate, LocalDate checkOutDate, int adults, List<Child> children, int rooms, boolean travelForWork) {
+    public AccommodationRequest(String destination, LocalDate checkInDate, LocalDate checkOutDate, int adults,
+                                List<Child> children, int rooms, boolean travelForWork) {
         this.destination = destination;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;

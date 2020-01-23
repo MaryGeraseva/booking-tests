@@ -1,6 +1,9 @@
-import models.AccommodationRequest;
-import pages.AccommodationSearchingPage;
-import pages.StartPage;
+package accommodationTests;
+
+import common.BaseTest;
+import models.accommodstion.AccommodationRequest;
+import pages.accommodation.AccommodationSearchingPage;
+import pages.common.StartPage;
 
 public class BaseAccommodationSearchingTest extends BaseTest {
 

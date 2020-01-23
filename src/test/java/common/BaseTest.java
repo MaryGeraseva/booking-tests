@@ -1,3 +1,5 @@
+package common;
+
 import assertions.ExtendedAssertions;
 import common.TestListener;
 import common.drivers.Driver;
@@ -19,9 +21,9 @@ import java.nio.file.Paths;
 @Listeners({TestListener.class})
 public class BaseTest {
 
-    protected WebDriver driver;
-    protected Logger log;
-    protected ExtendedAssertions assertions;
+    public WebDriver driver;
+    public Logger log;
+    public ExtendedAssertions assertions;
 
     @BeforeMethod
     public void setUp(Method method, ITestContext context, Object[] testData) {

@@ -1,14 +1,17 @@
-package pages;
+package pages.accommodation;
 
 import io.qameta.allure.Step;
-import models.Child;
-import models.AccommodationRequest;
+import models.accommodstion.AccommodationRequest;
+import models.accommodstion.Child;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import pages.common.BasePageObject;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 public class AccommodationSearchingPage extends BasePageObject {
 
@@ -29,6 +32,8 @@ public class AccommodationSearchingPage extends BasePageObject {
     private By reviewScoreBadge = By.cssSelector("div.bui-review-score__badge");
     private By placementRecommendationLabel = By.cssSelector("h4.sr-group-recommendation__title");
     private By recommendedSortingTab = By.xpath("//a[@data-category=\"popularity\"]");
+    private By availabilityCheckbox = By.cssSelector("div#filter_out_of_stock div.bui-checkbox__label");
+    private By seeAvailabilityButton = By.cssSelector("a.sr_cta_button");
 
 
     @Step("got the search parameters on the searching result screen")
@@ -73,7 +78,7 @@ public class AccommodationSearchingPage extends BasePageObject {
     }
 
     private String getDestination() {
-        return findElement(destinationInput).getAttribute("value");
+        return getAttribute(destinationInput, "value");
     }
 
     //sorting test methods
@@ -110,10 +115,14 @@ public class AccommodationSearchingPage extends BasePageObject {
     }
 
     private List<WebElement> getAccommodationParametersAsList(By parametersLocator) {
+        waitUpdating(parametersLocator);
+        return findAllElements(parametersLocator);
+    }
+
+    private void waitUpdating(By locator) {
         waitForVisibilityOf(By.cssSelector("div.sr-usp-overlay__loading"), 10);
         waitForInvisibilityOf(By.cssSelector("div.sr-usp-overlay__loading"), 10);
-        waitForVisibilityOf(parametersLocator, 12);
-        return findAllElements(parametersLocator);
+        waitForVisibilityOf(locator, 12);
     }
 
     //filtration tests methods
@@ -133,25 +142,29 @@ public class AccommodationSearchingPage extends BasePageObject {
         return reviewBadgeValue;
     }
 
+    @Step("click on the review score checkbox")
     public void setReviewScore(int indexReviewInList) {
-        getReviewCheckboxesList().get(indexReviewInList).click();
+        click(getReviewCheckboxesList().get(indexReviewInList));
     }
 
     @Step("checked is accommodation review scores presented in \"No rating\" category")
     public boolean isAccommodationReviewLabelPresent() {
-        waitForVisibilityOf(By.cssSelector("div.sr-usp-overlay__loading"), 10);
-        waitForInvisibilityOf(By.cssSelector("div.sr-usp-overlay__loading"), 10);
-        waitForVisibilityOf(accommodationBlock, 12);
+        waitUpdating(accommodationBlock);
         if (driver.findElements(reviewScoreBadge).size() == 0) {
             return true;
         }
         return false;
     }
 
+    @Step("click on the \"Only show available properties\" checkbox")
+    public void filterByAvailability() {
+        click(availabilityCheckbox);
+    }
+
     //recommended sorting methods
     @Step("got recommended sorting title")
     public String getRecommendedSorting() {
-        return findElement(recommendedSortingTab).getText().trim();
+        return getText(recommendedSortingTab).trim();
     }
 
     @Step("got placement recommendation labels")
@@ -165,4 +178,20 @@ public class AccommodationSearchingPage extends BasePageObject {
         return labels;
     }
 
+    //booking offers methods
+    private void clickSeeAvailabilityButton(int offerIndex) {
+        List<WebElement> buttonList = findAllElements(seeAvailabilityButton);
+        click(buttonList.get(offerIndex));
+    }
+
+    public AccommodationBookingPage getOfferPage(int offerIndex) {
+        clickSeeAvailabilityButton(offerIndex);
+        switchToTab(getWindowHeader());
+        return new AccommodationBookingPage();
+    }
+
+    public AccommodationBookingPage waitUpdatingAndGetOfferPage(int offerIndex) {
+        waitUpdating(accommodationBlock);
+        return getOfferPage(offerIndex);
+    }
 }

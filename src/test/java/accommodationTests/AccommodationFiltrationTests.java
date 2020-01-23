@@ -1,20 +1,22 @@
+package accommodationTests;
+
 import common.TestUtilities;
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;
-import models.AccommodationRequest;
-import models.Child;
+import models.accommodstion.AccommodationRequest;
+import models.accommodstion.Child;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import pages.AccommodationSearchingPage;
+import pages.accommodation.AccommodationSearchingPage;
 
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
-public class AccommodationFiltrationTest extends BaseAccommodationSearchingTest {
+public class AccommodationFiltrationTests extends BaseAccommodationSearchingTest {
 
     @DataProvider(name = "accommodationReviewFilters")
-    private static Object[][] files(){
+    private static Object[][] data() {
         LocalDate currentDate = LocalDate.now();
         LocalDate checkIn = TestUtilities.getInWeeksDate(1);
         LocalDate checkOut = TestUtilities.getInWeeksDate(2);

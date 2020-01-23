@@ -1,65 +1,83 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="bookingTests" verbose="1" parallel="tests" thread-count="8">
-    <test name="SearchParametersInputTest">
+<suite name="bookingTests" verbose="1" parallel="tests" thread-count="1">
+    <test name="1#SearchParametersInputTest">
         <classes>
-            <class name="AccommodationSearchingTest" >
+            <class name="accommodationTests.AccommodationSearchingTests" >
                 <methods>
                     <include name="searchParametersInputTest" />
                 </methods>
             </class>
         </classes>
     </test>
-    <test name="ChildrenPlacementValidationTest">
+    <test name="2#ChildrenPlacementValidationTest">
         <classes>
-            <class name="AccommodationSearchingTest" >
+            <class name="accommodationTests.AccommodationSearchingTests" >
                 <methods>
                     <include name="childrenPlacementValidationTest" />
                 </methods>
             </class>
         </classes>
     </test>
-    <test name="AccommodationSortingByPriceTest">
+    <test name="3#AccommodationSortingByPriceTest">
         <classes>
-            <class name="AccommodationSortingTest" >
+            <class name="accommodationTests.AccommodationSortingTests" >
                 <methods>
                     <include name="accommodationSortingByPriceTest" />
                 </methods>
             </class>
         </classes>
     </test>
-    <test name="AccommodationSortingByTypeTest">
+    <test name="4#AccommodationSortingByTypeTest">
         <classes>
-            <class name="AccommodationSortingTest" >
+            <class name="accommodationTests.AccommodationSortingTests" >
                 <methods>
                     <include name="accommodationSortingByTypeTest" />
                 </methods>
             </class>
         </classes>
     </test>
-    <test name="AccommodationFiltrationTest">
+    <test name="#5AccommodationFiltrationTests">
         <classes>
-            <class name="AccommodationFiltrationTest" >
+            <class name="accommodationTests.AccommodationFiltrationTests" >
                 <methods>
                     <include name="accommodationFiltrationByReviewTest" />
                 </methods>
             </class>
         </classes>
     </test>
-    <test name="RecommendedSortingTest">
+    <test name="6#RecommendedSortingTest">
         <classes>
-            <class name="PlacementRecommendationTest" >
+            <class name="accommodationTests.PlacementRecommendationTests" >
                 <methods>
                     <include name="recommendedSortingTest" />
                 </methods>
             </class>
         </classes>
     </test>
-    <test name="RecommendationLabelTest">
+    <test name="7#RecommendationLabelTest">
         <classes>
-            <class name="PlacementRecommendationTest" >
+            <class name="accommodationTests.PlacementRecommendationTests" >
                 <methods>
                     <include name="recommendationLabelTest" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="8#BookingOffersParametersTest">
+        <classes>
+            <class name="accommodationTests.BookingOffersTests" >
+                <methods>
+                    <include name="bookingOffersParametersTest" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="9#ReservationNotAllowedTest">
+        <classes>
+            <class name="accommodationTests.BookingOffersTests" >
+                <methods>
+                    <include name="ReservationNotAllowedTest" />
                 </methods>
             </class>
         </classes>

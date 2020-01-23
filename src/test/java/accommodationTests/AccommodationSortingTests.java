@@ -1,15 +1,17 @@
+package accommodationTests;
+
 import common.TestUtilities;
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;
-import models.Child;
-import models.AccommodationRequest;
+import models.accommodstion.Child;
+import models.accommodstion.AccommodationRequest;
 import org.testng.annotations.Test;
-import pages.AccommodationSearchingPage;
+import pages.accommodation.AccommodationSearchingPage;
 
 import java.time.LocalDate;
 import java.util.Arrays;
 
-public class AccommodationSortingTest extends BaseAccommodationSearchingTest {
+public class AccommodationSortingTests extends BaseAccommodationSearchingTest {
 
     @Test
     @Step("accommodationSortingByPriceTest started")

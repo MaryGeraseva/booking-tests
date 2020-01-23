@@ -1,19 +1,21 @@
+package accommodationTests;
+
 import common.TestUtilities;
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;
-import models.AccommodationRequest;
-import models.Child;
+import models.accommodstion.AccommodationRequest;
+import models.accommodstion.Child;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import pages.AccommodationSearchingPage;
+import pages.accommodation.AccommodationSearchingPage;
 
 import java.time.LocalDate;
 import java.util.Arrays;
 
-public class PlacementRecommendationTest extends BaseAccommodationSearchingTest {
+public class PlacementRecommendationTests extends BaseAccommodationSearchingTest {
 
     @DataProvider(name = "recommendedSorting")
-    private static Object[][] sorting(){
+    private static Object[][] sortingData(){
         LocalDate currentDate = LocalDate.now();
         LocalDate checkIn = TestUtilities.getInWeeksDate(1);
         LocalDate checkOut = TestUtilities.getInWeeksDate(2);
@@ -41,7 +43,7 @@ public class PlacementRecommendationTest extends BaseAccommodationSearchingTest 
     }
 
     @DataProvider(name = "placementRecommendationLabels")
-    private static Object[][] labels(){
+    private static Object[][] labelsData(){
         LocalDate currentDate = LocalDate.now();
         LocalDate checkIn = TestUtilities.getInWeeksDate(1);
         LocalDate checkOut = TestUtilities.getInWeeksDate(2);
