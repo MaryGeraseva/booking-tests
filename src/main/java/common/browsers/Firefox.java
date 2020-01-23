@@ -11,29 +11,12 @@ public class Firefox extends Browser {
     @Override
     public WebDriver getDriver() {
         System.setProperty("webdriver.gecko.driver", System.getProperty("selenium.driver"));
-        WebDriver driver;
-        if (browserHaveOptions(browser)) {
-            driver = new FirefoxDriver(getBrowserOptions());
-        } else {
-            driver = new FirefoxDriver();
-        }
-        return driver;
+        return new FirefoxDriver();
     }
 
     @Override
     public DesiredCapabilities getCapabilities() {
-        DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-        if (browserHaveOptions(browser)) {
-            capabilities.setCapability(FirefoxOptions.FIREFOX_OPTIONS, getBrowserOptions());
-        }
-        return capabilities;
+        return DesiredCapabilities.firefox();
     }
 
-    private FirefoxOptions getBrowserOptions() {
-        FirefoxOptions firefoxOptions = new FirefoxOptions();
-        FirefoxBinary firefoxBinary = new FirefoxBinary();
-        firefoxBinary.addCommandLineOptions("--headless");
-        firefoxOptions.setBinary(firefoxBinary);
-        return firefoxOptions;
-    }
 }

@@ -11,7 +11,6 @@ public class BrowserFactory {
     public BrowserFactory() {
         String propertyBrowser = System.getProperty("selenium.browser");
         if (propertyBrowser == null) {
-            Browser.browser = BrowserTypes.CHROME.getValue();
             browser = new Chrome();
             log.info("didn't get browser type, started default browser chrome");
         } else if (propertyBrowser.contains("firefox")) {
