@@ -12,6 +12,7 @@ public class FlightsStartPage extends BasePageObject {
 
     private String url = "https://booking.kayak.com/";
 
+    //search box
     private By departureInput = By.xpath("//input[@aria-label='Flight origin input'][@placeholder='From where?']");
     private By arrivalInput = By.xpath("//input[@aria-label='Flight destination input'][@placeholder='To where?']");
     private By datePicker = By.cssSelector("div.Common-Widgets-Datepicker-DateRangeInput.noBorderRemoval");

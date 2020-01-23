@@ -5,7 +5,6 @@ import common.logger.LogInstance;
 import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -131,11 +130,6 @@ public class BasePageObject {
         }
     }
 
-    public boolean isVisible(By locator) {
-        return findElement(locator).isDisplayed();
-    }
-
-
     public List<WebElement> getColumns(By locator) {
         return driver.findElement(locator).findElements(By.tagName("td"));
     }
@@ -252,7 +246,6 @@ public class BasePageObject {
     public String getWindowHeader() {
         return driver.getWindowHandle();
     }
-
 }
 
 

@@ -13,8 +13,10 @@ import java.util.List;
 public class StartPage extends BasePageObject {
 
     private String ulr = "https://www.booking.com";
+    //localisation menu
     private By languageLink = By.xpath("//a[@class='popover_trigger']");
     private By englishUKLink = By.cssSelector("li.lang_en-gb  a");
+    //search box
     private By destinationInputField = By.id("ss");
     private By datePicker = By.cssSelector("div.xp__dates");
     private By currentMonth = By.xpath("//div[@class='bui-calendar__wrapper'][1]//tbody");
@@ -30,8 +32,10 @@ public class StartPage extends BasePageObject {
     private By roomStepperSubtract = By.cssSelector("div.sb-group__field-rooms button.bui-stepper__subtract-button");
     private By roomStepperAdd = By.cssSelector("div.sb-group__field-rooms button.bui-stepper__add-button");
     private By ageDropdown = By.cssSelector("select[name=age]");
-    private By checkPriceButton = By.cssSelector("button.sb-searchbox__button");
     private By forWorkTravelCheckbox = By.cssSelector("div.xp__travel-purpose");
+    private By searchButton = By.cssSelector("button.sb-searchbox__button");
+
+    //additional services
     private By flightsLink = By.xpath("//a[@data-decider-header=\"flights\"]");
 
     public void open() {
@@ -98,7 +102,7 @@ public class StartPage extends BasePageObject {
 
     @Step("launched accommodation search")
     public AccommodationSearchingPage launchSearch() {
-        click(checkPriceButton);
+        click(searchButton);
         return new AccommodationSearchingPage();
     }
 

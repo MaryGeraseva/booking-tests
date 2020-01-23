@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="bookingTests" verbose="1" parallel="tests" thread-count="1">
+<suite name="bookingTests" verbose="1" parallel="tests" thread-count="2">
     <test name="1#SearchParametersInputTest">
         <classes>
             <class name="accommodationTests.AccommodationSearchingTests" >
@@ -37,7 +37,7 @@
             </class>
         </classes>
     </test>
-    <test name="#5AccommodationFiltrationTests">
+    <test name="#5AccommodationFiltrationByReviewTests">
         <classes>
             <class name="accommodationTests.AccommodationFiltrationTests" >
                 <methods>
@@ -46,7 +46,16 @@
             </class>
         </classes>
     </test>
-    <test name="6#RecommendedSortingTest">
+    <test name="#6AccommodationFiltrationByPriceTests">
+        <classes>
+            <class name="accommodationTests.AccommodationFiltrationTests" >
+                <methods>
+                    <include name="accommodationFiltrationByPriceTest" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="7#RecommendedSortingTest">
         <classes>
             <class name="accommodationTests.PlacementRecommendationTests" >
                 <methods>
@@ -55,7 +64,7 @@
             </class>
         </classes>
     </test>
-    <test name="7#RecommendationLabelTest">
+    <test name="8#RecommendationLabelTest">
         <classes>
             <class name="accommodationTests.PlacementRecommendationTests" >
                 <methods>
@@ -64,7 +73,7 @@
             </class>
         </classes>
     </test>
-    <test name="8#BookingOffersParametersTest">
+    <test name="9#BookingOffersParametersTest">
         <classes>
             <class name="accommodationTests.BookingOffersTests" >
                 <methods>
@@ -73,7 +82,7 @@
             </class>
         </classes>
     </test>
-    <test name="9#ReservationNotAllowedTest">
+    <test name="10#ReservationNotAllowedTest">
         <classes>
             <class name="accommodationTests.BookingOffersTests" >
                 <methods>

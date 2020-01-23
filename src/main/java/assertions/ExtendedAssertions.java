@@ -11,8 +11,11 @@ import org.testng.asserts.SoftAssert;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 public class ExtendedAssertions {
 
@@ -38,8 +41,8 @@ public class ExtendedAssertions {
     }
 
     @Step("checked sorting accommodation by price")
-    public void assertSortingByPriceIsCorrect(List<Integer> actualList) {
-        List<Integer> expectedList = new ArrayList<>(actualList);
+    public void assertSortingByPriceIsCorrect(List<Double> actualList) {
+        List<Double> expectedList = new ArrayList<>(actualList);
         Collections.sort(expectedList);
         Assert.assertEquals(expectedList, actualList,
                 String.format("sorting wasn't correct, expected list: %s\n actual list: %s",
@@ -79,6 +82,26 @@ public class ExtendedAssertions {
                 reviewScoreLabel));
     }
 
+    @Step("checked filtration accommodation by price")
+    public void assertFiltrationByPriceIsCorrect(List<Double> priceList, double[] priceRange,
+                                                 LocalDate checkIn, LocalDate checkOut) {
+        for (double price : priceList) {
+            System.out.println(DAYS.between(checkIn, checkOut));
+            double pricePerDay = price/DAYS.between(checkIn, checkOut);
+            Assert.assertTrue(isPriceInRange(pricePerDay, priceRange),
+                    String.format("filtration wasn't correct, price %s doesn't match in range %s",
+                            pricePerDay, priceRange));
+        }
+        log.info(String.format("sorting by type was correct, all review scores match to the range: %s",
+                Arrays.toString(priceRange)));
+    }
+
+    private boolean isPriceInRange(double price, double[] priceRange) {
+        if (priceRange.length == 1 && price >= priceRange[0]) return true;
+        if (price >= priceRange[0] && price <= priceRange[1]) return true;
+        return false;
+    }
+
     @Step("checked recommendation by search parameters")
     public void assertRecommendationIsCorrect(String actualRecommendation, String expectedRecommendation) {
         Assert.assertEquals(actualRecommendation, expectedRecommendation,
@@ -113,7 +136,7 @@ public class ExtendedAssertions {
     }
 
     @Step("checked booking price")
-    public void assertPrice(AccommodationRequest accommodationRequest, List<Integer> priceList, int expectedPrice) {
+    public void assertPrice(AccommodationRequest accommodationRequest, List<Double> priceList, double expectedPrice) {
         softAssert = new SoftAssert();
         softAssert.assertTrue(priceList.contains(expectedPrice),
                 String.format("didn't got expected price: %s", expectedPrice));

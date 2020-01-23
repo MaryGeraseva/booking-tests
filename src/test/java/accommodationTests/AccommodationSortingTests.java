@@ -3,13 +3,13 @@ package accommodationTests;
 import common.TestUtilities;
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;
-import models.accommodstion.Child;
 import models.accommodstion.AccommodationRequest;
+import models.accommodstion.Child;
 import org.testng.annotations.Test;
 import pages.accommodation.AccommodationSearchingPage;
 
 import java.time.LocalDate;
-import java.util.Arrays;
+import java.util.Collections;
 
 public class AccommodationSortingTests extends BaseAccommodationSearchingTest {
 
@@ -19,11 +19,11 @@ public class AccommodationSortingTests extends BaseAccommodationSearchingTest {
     public void accommodationSortingByPriceTest() {
         LocalDate checkIn = LocalDate.now();
         LocalDate checkOut = TestUtilities.getInWeeksDate(2);
-        AccommodationRequest accommodationRequest = new AccommodationRequest("Paris", checkIn, checkOut, 2,
-                Arrays.asList(new Child(5)), 1, false);
-        AccommodationSearchingPage accommodationSearchingPage = getAccommodationSearchingResults(accommodationRequest);
-        accommodationSearchingPage.sortByPrice();
-        assertions.assertSortingByPriceIsCorrect(accommodationSearchingPage.getPriceList());
+        AccommodationRequest request = new AccommodationRequest("Paris", checkIn, checkOut, 2,
+                Collections.singletonList(new Child(5)), 1, false);
+        AccommodationSearchingPage searchingPage = getAccommodationSearchingResults(request);
+        searchingPage.sortByPrice();
+        assertions.assertSortingByPriceIsCorrect(searchingPage.getPriceList());
     }
 
     @Test
@@ -32,10 +32,10 @@ public class AccommodationSortingTests extends BaseAccommodationSearchingTest {
     public void accommodationSortingByTypeTest() {
         LocalDate checkIn = LocalDate.now();
         LocalDate checkOut = TestUtilities.getInWeeksDate(2);
-        AccommodationRequest accommodationRequest = new AccommodationRequest("Lida", checkIn, checkOut, 2,
-                Arrays.asList(), 1, false);
-        AccommodationSearchingPage accommodationSearchingPage = getAccommodationSearchingResults(accommodationRequest);
-        accommodationSearchingPage.sortByType();
-        assertions.assertSortingByTypeIsCorrect(accommodationSearchingPage.getTypeList());
+        AccommodationRequest request = new AccommodationRequest("Lida", checkIn, checkOut, 2,
+                Collections.emptyList(), 1, false);
+        AccommodationSearchingPage searchingPage = getAccommodationSearchingResults(request);
+        searchingPage.sortByType();
+        assertions.assertSortingByTypeIsCorrect(searchingPage.getTypeList());
     }
 }

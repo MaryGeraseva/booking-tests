@@ -12,19 +12,20 @@ import java.util.List;
 import java.util.Locale;
 
 public class AccommodationBookingPage extends BasePageObject {
+
     private By priceLabel = By.cssSelector("div.bui-price-display__value");
     private By checkInLabel = By.id("av-summary-checkin");
     private By checkOutLabel = By.id("av-summary-checkout");
     private By reserveButton = By.xpath("//span[contains(text(),\"I'll reserve\")]");
 
     @Step("got the list of presented prices")
-    public List<Integer> getPriceList() {
+    public List<Double> getPriceList() {
         List<WebElement> priceLabels = findAllElements(priceLabel);
-        List<Integer> prices = new ArrayList<>();
+        List<Double> prices = new ArrayList<>();
         for (WebElement price : priceLabels) {
             String text = price.getText().replaceAll("[^0-9.]", "");
             if (!text.isEmpty()) {
-                prices.add(Integer.parseInt(text));
+                prices.add(Double.parseDouble(text));
             }
         }
         log.info(String.format("got list of booking prices: \n%s", prices));
