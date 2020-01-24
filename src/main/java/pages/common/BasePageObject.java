@@ -161,39 +161,12 @@ public class BasePageObject {
         log.info(String.format("made multiple clicks on the stepper: %s times", clicksCount));
     }
 
-    @Step("selected the dropdown option by text")
-    public void selectOptionByText(By dropdownLocator, String expectedText) {
-        WebElement dropdownElement = findElement(dropdownLocator);
-        Select dropdown = new Select(dropdownElement);
-        dropdown.selectByVisibleText(expectedText);
-        log.info(String.format("the dropdown option with text %s is selected", expectedText));
-    }
-
-    @Step("selected the dropdown option by index")
-    public void selectOptionByIndex(By dropdownLocator, int index) {
-        WebElement dropdownElement = findElement(dropdownLocator);
-        selectOptionByIndex(dropdownElement, index);
-        log.info(String.format("the dropdown option with index %s is selected", index));
-    }
-
     @Step("selected the dropdown option by index")
     public void selectOptionByIndex(WebElement dropdownElement, int index) {
         Select dropdown = new Select(dropdownElement);
         dropdown.selectByIndex(index);
         log.info(String.format("the dropdown option with index %s and text %s is selected",
                 index, dropdown.getFirstSelectedOption().getText().trim()));
-    }
-
-    @Step("checked the dropdown option selection")
-    public boolean checkSelectedOption(String expectedText, By dropdownLocator) {
-        WebElement dropdownElement = findElement(dropdownLocator);
-        Select dropdown = new Select(dropdownElement);
-        if (!dropdown.getFirstSelectedOption().getText().equals(expectedText)) {
-            log.info(String.format("the dropdown option with text %s isn't selected", expectedText));
-            return false;
-        }
-        log.info(String.format("the dropdown option with text %s is selected", expectedText));
-        return true;
     }
 
     @Step("got the selected option text")
@@ -235,8 +208,8 @@ public class BasePageObject {
 
     @Step("switched to the other browser tab")
     public void switchToTab(String firstWindowHeader) {
-        for(String windowHandle : driver.getWindowHandles()) {
-            if(!windowHandle.equals(firstWindowHeader)) {
+        for (String windowHandle : driver.getWindowHandles()) {
+            if (!windowHandle.equals(firstWindowHeader)) {
                 driver.switchTo().window(windowHandle);
             }
         }

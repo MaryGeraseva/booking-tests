@@ -10,7 +10,6 @@ public class Driver {
     }
 
     public static WebDriver getDriver() {
-
         if (threadLocalWebDriver.get() == null) {
             threadLocalWebDriver.set(createWebDriver());
         }
@@ -24,5 +23,4 @@ public class Driver {
     private static WebDriver createWebDriver() {
         return new DriverFactory().createDriver();
     }
-
 }

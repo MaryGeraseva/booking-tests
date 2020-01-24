@@ -2,6 +2,7 @@ package common;
 
 import assertions.ExtendedAssertions;
 import common.drivers.Driver;
+import common.listener.TestListener;
 import common.logger.LogInstance;
 import io.qameta.allure.Allure;
 import org.apache.log4j.Logger;
@@ -55,7 +56,7 @@ public class BaseTest {
     }
 
     private String getLogPath(ITestContext context) {
-        return  String.format("%s\\target\\logs\\methods\\%s\\%d#%s.log",
+        return String.format("%s\\target\\logs\\methods\\%s\\%d#%s.log",
                 System.getProperty("user.dir"), context.getCurrentXmlTest().getName(),
                 LogInstance.getTestCaseId(context), Thread.currentThread().getName());
     }

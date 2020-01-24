@@ -9,8 +9,9 @@ public abstract class Browser {
 
     Browser(String browserProperty) {
         this.browserProperty = browserProperty;
-        if (System.getenv(browserProperty) == null){
-            throw new RuntimeException(String.format("unable to find a Driver, please, set system environment variable: %s", browserProperty));
+        if (System.getenv(browserProperty) == null) {
+            throw new RuntimeException(String.format("driver didn't find, set system environment variable: %s",
+                    browserProperty));
         }
         System.setProperty(browserProperty, System.getenv(browserProperty));
     }

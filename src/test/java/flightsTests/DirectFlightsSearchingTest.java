@@ -1,7 +1,7 @@
 package flightsTests;
 
 import common.BaseTest;
-import common.DateTimeUtils;
+import common.utils.DateTimeUtils;
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;
 import models.flights.Flight;

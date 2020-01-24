@@ -34,7 +34,6 @@ public class StartPage extends BasePageObject {
     private By ageDropdown = By.cssSelector("select[name=age]");
     private By forWorkTravelCheckbox = By.cssSelector("div.xp__travel-purpose");
     private By searchButton = By.cssSelector("button.sb-searchbox__button");
-
     //additional services
     private By flightsLink = By.xpath("//a[@data-decider-header=\"flights\"]");
 

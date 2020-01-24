@@ -49,10 +49,12 @@ public class AccommodationBookingPage extends BasePageObject {
         return date;
     }
 
+    @Step("clicked on the reserve button")
     public void clickReserveButton() {
         click(reserveButton);
     }
 
+    @Step("checked is the reserve button disabled")
     public boolean reserveButtonIsDisable() {
         return findElement(By.xpath("//button[@data-title='Select your accommodation first']")).isEnabled();
     }

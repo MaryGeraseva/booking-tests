@@ -1,6 +1,6 @@
 package accommodationTests;
 
-import common.DateTimeUtils;
+import common.utils.DateTimeUtils;
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;
 import models.accommodation.AccommodationRequest;

@@ -5,11 +5,11 @@ import org.apache.log4j.Logger;
 
 public class BrowserFactory {
 
-    private Logger log = LogInstance.getLogger();
     private Browser browser;
 
     public BrowserFactory() {
         String propertyBrowser = System.getProperty("browser");
+        Logger log = LogInstance.getLogger();
         if (propertyBrowser == null) {
             browser = new Chrome();
             log.info("no browser type defined, started default browser chrome");

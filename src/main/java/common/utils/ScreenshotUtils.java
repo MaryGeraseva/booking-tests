@@ -1,4 +1,4 @@
-package common;
+package common.utils;
 
 import common.drivers.Driver;
 import io.qameta.allure.Attachment;
@@ -14,7 +14,7 @@ public class ScreenshotUtils {
 
     public void getScreenshotFile(String path) {
         WebDriver driver = Driver.getDriver();
-        File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         try {
             FileUtils.copyFile(scrFile, new File(path));
         } catch (IOException e) {
@@ -29,7 +29,7 @@ public class ScreenshotUtils {
 
     public byte[] getScreenshotByte() {
         WebDriver driver = Driver.getDriver();
-        return  ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
+        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }
 
 }

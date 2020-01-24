@@ -1,4 +1,4 @@
-package common;
+package common.utils;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -6,6 +6,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 public class DateTimeUtils {
+
     public static String getTodayDate() {
         return (new SimpleDateFormat("yyyyMMdd").format(new Date()));
     }

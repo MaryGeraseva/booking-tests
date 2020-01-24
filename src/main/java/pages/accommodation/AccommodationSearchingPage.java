@@ -206,17 +206,20 @@ public class AccommodationSearchingPage extends BasePageObject {
     }
 
     //booking offers methods
+    @Step("clicked on the see availability button")
     private void clickSeeAvailabilityButton(int offerIndex) {
         List<WebElement> buttonList = findAllElements(seeAvailabilityButton);
         click(buttonList.get(offerIndex));
     }
 
+    @Step("opened the page with accommodation offer")
     public AccommodationBookingPage getOfferPage(int offerIndex) {
         clickSeeAvailabilityButton(offerIndex);
         switchToTab(getWindowHeader());
         return new AccommodationBookingPage();
     }
 
+    @Step("opened the page with accommodation offer")
     public AccommodationBookingPage waitUpdatingAndGetOfferPage(int offerIndex) {
         waitUpdating(accommodationBlock);
         return getOfferPage(offerIndex);

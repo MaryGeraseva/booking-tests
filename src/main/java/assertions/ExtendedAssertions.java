@@ -32,7 +32,8 @@ public class ExtendedAssertions {
     }
 
     @Step("checked parameters on the searching result screen")
-    public void assertSearchParametersShownCorrect(AccommodationRequest expectedParameters, AccommodationRequest actualParameters) {
+    public void assertSearchParametersShownCorrect(AccommodationRequest expectedParameters,
+                                                   AccommodationRequest actualParameters) {
         Assert.assertEquals(expectedParameters, actualParameters,
                 String.format("expected parameters aren't shown correct %s, actual parameters are %s",
                         expectedParameters, actualParameters));
@@ -53,7 +54,7 @@ public class ExtendedAssertions {
 
     @Step("checked sorting accommodation by type")
     public void assertSortingByTypeIsCorrect(List<String> actualList) {
-        for (String type: actualList) {
+        for (String type : actualList) {
             Assert.assertTrue(type.contains("Apart"),
                     String.format("sorting wasn't correct, got: %s", type));
         }
@@ -64,7 +65,7 @@ public class ExtendedAssertions {
     public void assertFiltrationByReviewScoreIsCorrect(List<Double> actualList, String reviewScoreLabel) {
         int reviewScoreInt = Integer.parseInt(reviewScoreLabel.replaceAll("[^0-9]", ""));
         Double reviewScoreCategory = Double.parseDouble(Integer.toString(reviewScoreInt));
-        for (Double review: actualList) {
+        for (Double review : actualList) {
             Assert.assertTrue(review >= reviewScoreCategory,
                     String.format("filtration wasn't correct, actual review score: %s doesn't match to the category: %s",
                             review, reviewScoreLabel));
@@ -86,8 +87,7 @@ public class ExtendedAssertions {
     public void assertFiltrationByPriceIsCorrect(List<Double> priceList, double[] priceRange,
                                                  LocalDate checkIn, LocalDate checkOut) {
         for (double price : priceList) {
-            //System.out.println(DAYS.between(checkIn, checkOut));
-            double pricePerDay = price/DAYS.between(checkIn, checkOut);
+            double pricePerDay = price / DAYS.between(checkIn, checkOut);
             Assert.assertTrue(isPriceInRange(pricePerDay, priceRange),
                     String.format("filtration wasn't correct, price %s doesn't match in range %s",
                             pricePerDay, Arrays.toString(priceRange)));
@@ -113,7 +113,7 @@ public class ExtendedAssertions {
 
     @Step("checked recommendation by search parameters")
     public void assertRecommendationIsCorrect(List<String> actualRecommendationList, String expectedRecommendation) {
-        for (String recommendation: actualRecommendationList) {
+        for (String recommendation : actualRecommendationList) {
             Assert.assertTrue(recommendation.contains(expectedRecommendation),
                     String.format("expected recommendation wasn't got,\n expected: %s, but got: %s",
                             expectedRecommendation, recommendation));

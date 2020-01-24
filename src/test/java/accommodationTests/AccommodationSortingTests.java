@@ -1,6 +1,6 @@
 package accommodationTests;
 
-import common.DateTimeUtils;
+import common.utils.DateTimeUtils;
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;
 import models.accommodation.AccommodationRequest;
@@ -32,7 +32,7 @@ public class AccommodationSortingTests extends BaseAccommodationSearchingTest {
     public void accommodationSortingByTypeTest() {
         LocalDate checkIn = LocalDate.now();
         LocalDate checkOut = DateTimeUtils.getInWeeksDate(2);
-        AccommodationRequest request = new AccommodationRequest("Lida", checkIn, checkOut, 2,
+        AccommodationRequest request = new AccommodationRequest("London", checkIn, checkOut, 2,
                 Collections.emptyList(), 1, false);
         AccommodationSearchingPage searchingPage = getAccommodationSearchingResults(request);
         searchingPage.sortByType();

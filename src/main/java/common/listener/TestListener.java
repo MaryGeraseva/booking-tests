@@ -1,6 +1,8 @@
-package common;
+package common.listener;
 
 import common.logger.LogInstance;
+import common.utils.DateTimeUtils;
+import common.utils.ScreenshotUtils;
 import org.apache.log4j.Logger;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
