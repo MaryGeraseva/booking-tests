@@ -9,29 +9,45 @@ The project uses a thread-safe singleton logger. The logger makes a personal log
 There is also used Allure reporting features for showing the most important test steps. The framework makes a screenshot on each test failure and shows it within the Allure report.
 
 ## Usage
-### How to run the tests suite
-Be sure to check for drivers and system variables:  
+### Requirements
+Be sure to check for drivers and system environment variables:  
 * JAVA_HOME 
 * ALLURE_HOME
+* M2_HOME (Maven)
 * webdriver.chrome.driver
 * webdriver.gecko.driver
 
 ### How to run the tests suite  
 
-* run testNG suite by default *(on chrome locally)*   
+By default suite configured to run in 2 threads in parallel. 
+
+* run testNG suite by default *(on Chrome locally)*   
 `
 mvn clean test -Dsurefire.suiteXmlFiles=.\src\test\resources\allTestsSuite.xml
 `  
-or add parameters:
-  * run on Selenium grid server `-Dselenium.server=grid -Dserver.url=[$url]}`
-  * run on chrome `-Dselenium.browser=chrome`
-  * run on firefox `-Dselenium.browser=firefox`
- 
-* generate allure report `mvn allure:serve`
+* or run on Firefox  
+`
+mvn clean test -Dsurefire.suiteXmlFiles=.\src\test\resources\allTestsSuite.xml -Dbrowser=firefox
+`  
+
+To run on grid make sure that at least 2 nodes of Chrome and/or Firefox are up and running in hub.
+
+* in Grid on Chrome run  
+`
+mvn clean test -Dsurefire.suiteXmlFiles=.\src\test\resources\allTestsSuite.xml -Dhub.url={$url}
+` 
+
+* in Grid on Firefox run    
+`
+mvn clean test -Dsurefire.suiteXmlFiles=.\src\test\resources\allTestsSuite.xml -Dbrowser=firefox -Dhub.url={$url}
+` 
 
 ### Logging and reporting
+
+* generate allure report `mvn allure:serve`
+
 Сan find the logs in the folder `.\target\logs\methods`
-or in attach to the allure report  `Tear down >> tearDown >> Logs`
+or in attach to the allure report in section  `Tear down >> tearDown >> Logs`
 
 ## For feedback
 **e-mail:** mary.geraseva@gmail.com  
