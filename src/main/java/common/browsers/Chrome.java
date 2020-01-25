@@ -18,7 +18,7 @@ public class Chrome extends Browser {
 
     @Override
     public Capabilities getOptions() {
-       return new ChromeOptions();
+        return new ChromeOptions();
     }
 }
 

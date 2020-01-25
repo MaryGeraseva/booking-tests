@@ -30,7 +30,7 @@ public class BasePageObject {
 
     @Step("got the web element text")
     public String getText(By locator) {
-        waitForVisibilityOf(locator, 12);
+        waitForVisibilityOf(locator, 15);
         String text = driver.findElement(locator).getText();
         log.info(String.format("got web element text %s", text));
         return text;
@@ -38,36 +38,36 @@ public class BasePageObject {
 
     @Step("got the web element attribute")
     public String getAttribute(By locator, String attributeName) {
-        waitForVisibilityOf(locator, 12);
+        waitForVisibilityOf(locator, 15);
         String value = findElement(locator).getAttribute(attributeName);
         log.info(String.format("got web element attribute %s", value));
         return value;
     }
 
     public WebElement findElement(By locator) {
-        waitForVisibilityOf(locator, 12);
+        waitForVisibilityOf(locator, 15);
         return driver.findElement(locator);
     }
 
     public List<WebElement> findAllElements(By locator) {
-        waitForVisibilityOf(locator, 12);
+        waitForVisibilityOf(locator, 15);
         return driver.findElements(locator);
     }
 
     public void click(By locator) {
-        waitForVisibilityOf(locator, 12);
+        waitForVisibilityOf(locator, 15);
         findElement(locator).click();
         log.info(String.format("clicked on the web element %s", locator.toString()));
     }
 
     public void click(WebElement element) {
-        waitForVisibilityOf(element, 12);
+        waitForVisibilityOf(element, 15);
         element.click();
     }
 
     @Step("typed in the field")
     public void type(By locator, String text) {
-        waitForVisibilityOf(locator, 12);
+        waitForVisibilityOf(locator, 15);
         findElement(locator).sendKeys(text);
         log.info(String.format("in the field typed: %s", text));
     }
@@ -132,25 +132,6 @@ public class BasePageObject {
 
     public List<WebElement> getColumns(By locator) {
         return driver.findElement(locator).findElements(By.tagName("td"));
-    }
-
-    private void clickDate(By locator, int date) {
-        List<WebElement> columns = getColumns(locator);
-        for (WebElement cell : columns) {
-            if (cell.getText().equals(Integer.toString(date))) {
-                cell.click();
-            }
-        }
-    }
-
-    @Step("picked checkIn/checkOut")
-    public void pickDates(By currentMonthLocator, By nextMonthLocator, int checkIn, int checkOut) {
-        clickDate(currentMonthLocator, checkIn);
-        if (checkOut < checkIn) {
-            clickDate(nextMonthLocator, checkOut);
-        } else {
-            clickDate(currentMonthLocator, checkOut);
-        }
     }
 
     @Step("made multiple clicks on the stepper")

@@ -19,7 +19,6 @@ public class LogAppender {
 
         FileAppender appender = new FileAppender();
         appender.setFile(path);
-//        appender.setLayout(new EnhancedPatternLayout("%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1} - %m%n"));
         appender.setLayout(new EnhancedPatternLayout("%d{yyyy-MM-dd HH:mm:ss} %-5p  - %m%n"));
         appender.setThreshold(Level.TRACE);
         appender.setAppend(false);
@@ -43,7 +42,7 @@ public class LogAppender {
                 System.getProperty("user.dir"), context.getCurrentXmlTest().getName(), testCaseId, Thread.currentThread().getName());
     }
 
-    public static ConsoleAppender consoleAppenderConfig(){
+    public static ConsoleAppender consoleAppenderConfig() {
         ConsoleAppender consoleAppender = new ConsoleAppender();
         consoleAppender.setLayout(new EnhancedPatternLayout("%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1} - %m%n"));
         consoleAppender.setThreshold(Level.TRACE);

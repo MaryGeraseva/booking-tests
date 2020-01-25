@@ -55,8 +55,14 @@ public class StartPage extends BasePageObject {
     @Step("set checkIn/checkOut dates")
     public void setDates(LocalDate checkInDate, LocalDate checkOutDate) {
         click(datePicker);
-        pickDates(currentMonth, nextMonth, checkInDate.getDayOfMonth(), checkOutDate.getDayOfMonth());
+        setDate(checkInDate);
+        setDate(checkOutDate);
         log.info(String.format("set checkIn %s >> checkOut %s", checkInDate, checkOutDate));
+    }
+
+    private void setDate(LocalDate date) {
+        String locator = String.format("//td[@data-date='%s']", date);
+        click(By.xpath(locator));
     }
 
     @Step("set the adults quantity")

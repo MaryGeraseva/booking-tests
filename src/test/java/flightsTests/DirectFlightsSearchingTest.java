@@ -33,7 +33,9 @@ public class DirectFlightsSearchingTest extends BaseTest {
         startPage.open();
         assertions.urlIsCorrect(startPage.getUlr());
         FlightsStartPage flightsStartPage = startPage.openFlightsPage();
-        assertions.urlIsCorrect(flightsStartPage.getUrl());
+//        FlightsStartPage flightsStartPage = new FlightsStartPage();
+//        flightsStartPage.openPage(flightsStartPage.getUrl());
+//        assertions.urlIsCorrect(flightsStartPage.getUrl());
         FlightsSearchingPage flightsSearchingPage = flightsStartPage.searchFlights(flight.getDepartureDestination(),
                 flight.getArrivalDestination(),
                 flight.getDepartureDate(), flight.getArrivalDate());

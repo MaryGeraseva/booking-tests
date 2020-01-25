@@ -13,7 +13,8 @@ public class LogInstance {
     private static ConcurrentHashMap<String, Integer> testCaseIdList = new ConcurrentHashMap<>();
     private static volatile int loggerId = 0;
 
-    private LogInstance() {}
+    private LogInstance() {
+    }
 
     public static synchronized Logger getLogger() {
         if (log.get() == null) {
