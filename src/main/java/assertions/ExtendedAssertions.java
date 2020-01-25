@@ -86,19 +86,21 @@ public class ExtendedAssertions {
     @Step("checked filtration accommodation by price")
     public void assertFiltrationByPriceIsCorrect(List<Double> priceList, double[] priceRange,
                                                  LocalDate checkIn, LocalDate checkOut) {
+        double nights = DAYS.between(checkIn, checkOut);
+        double[] allNightPriceRange = Arrays.stream(priceRange).map(i -> i * nights).toArray();
+
         for (double price : priceList) {
-            double pricePerDay = price / DAYS.between(checkIn, checkOut);
-            Assert.assertTrue(isPriceInRange(pricePerDay, priceRange),
+            Assert.assertTrue(isPriceInRange(price, allNightPriceRange),
                     String.format("filtration wasn't correct, price %s doesn't match in range %s",
-                            pricePerDay, Arrays.toString(priceRange)));
+                            price, Arrays.toString(allNightPriceRange)));
         }
         log.info(String.format("sorting by type was correct, all review scores match to the range: %s",
-                Arrays.toString(priceRange)));
+                Arrays.toString(allNightPriceRange)));
     }
 
-    private boolean isPriceInRange(double price, double[] priceRange) {
-        if (priceRange.length == 1 && price >= priceRange[0]) return true;
-        if (price >= priceRange[0] && price <= priceRange[1]) return true;
+    private boolean isPriceInRange(double price, double[] allNightPriceRange) {
+        if (allNightPriceRange.length == 1 && price >= allNightPriceRange[0]) return true;
+        if (price >= allNightPriceRange[0] && price <= allNightPriceRange[1]) return true;
         return false;
     }
 
