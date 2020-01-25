@@ -1,5 +1,6 @@
 package common.drivers;
 
+import common.browsers.Browser;
 import common.browsers.BrowserFactory;
 import common.logger.LogInstance;
 import org.apache.log4j.Logger;
@@ -19,14 +20,16 @@ public class DriverFactory {
     public WebDriver createDriver() {
         if (hubUrl != null) {
             try {
-                driver = new RemoteWebDriver(new URL(hubUrl), new BrowserFactory().getBrowser().getCapabilities());
+                driver = new RemoteWebDriver(new URL(hubUrl), new BrowserFactory().getBrowser().getOptions());
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
             log.info("started webDriver on the selenium grid server");
             log.info("server URL: " + hubUrl);
         } else {
-            driver = new BrowserFactory().getBrowser().getDriver();
+            Browser browser = new BrowserFactory().getBrowser();
+            driver = browser.getDriver();
+            log.info("started local webDriver: " + browser.getDriverProperty());
         }
         return driver;
     }

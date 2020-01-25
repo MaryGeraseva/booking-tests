@@ -1,26 +1,26 @@
 package common.browsers;
 
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 public abstract class Browser {
 
-    private String browserProperty;
+    private String driverProperty;
 
-    Browser(String browserProperty) {
-        this.browserProperty = browserProperty;
-        if (System.getenv(browserProperty) == null) {
+    Browser(String driverProperty) {
+        this.driverProperty = driverProperty;
+        if (System.getenv(driverProperty) == null) {
             throw new RuntimeException(String.format("driver didn't find, set system environment variable: %s",
-                    browserProperty));
+                    driverProperty));
         }
-        System.setProperty(browserProperty, System.getenv(browserProperty));
+        System.setProperty(driverProperty, System.getenv(driverProperty));
     }
 
     public abstract WebDriver getDriver();
 
-    public abstract DesiredCapabilities getCapabilities();
+    public abstract Capabilities getOptions();
 
-    String getBrowserProperty() {
-        return browserProperty;
+    public String getDriverProperty() {
+        return driverProperty;
     }
 }
