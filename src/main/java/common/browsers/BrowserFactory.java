@@ -15,10 +15,10 @@ public class BrowserFactory {
             log.info("no browser type defined, started default browser Chrome");
         } else if (propertyBrowser.equals("firefox")) {
             browser = new Firefox();
-            log.info("Browser: Firefox");
+            log.info("browser: Firefox");
         } else if (propertyBrowser.equals("chrome")) {
             browser = new Chrome();
-            log.info("Browser: Chrome");
+            log.info("browser: Chrome");
         } else {
             browser = new Chrome();
             log.warn("unknown browser type, only Chrome and Firefox supported, started default browser chrome");

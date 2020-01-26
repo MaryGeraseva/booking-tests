@@ -37,7 +37,7 @@
             </class>
         </classes>
     </test>
-    <test name="#5AccommodationFiltrationByReviewTests">
+    <test name="5#AccommodationFiltrationByReviewTests">
         <classes>
             <class name="accommodationTests.AccommodationFiltrationTests" >
                 <methods>
@@ -46,7 +46,7 @@
             </class>
         </classes>
     </test>
-    <test name="#6AccommodationFiltrationByPriceTests">
+    <test name="6#AccommodationFiltrationByPriceTests">
         <classes>
             <class name="accommodationTests.AccommodationFiltrationTests" >
                 <methods>
